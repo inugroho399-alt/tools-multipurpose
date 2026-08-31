@@ -6,11 +6,8 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
 
-  const navItems = [
-    { href: "/merge-pdf", short: "Merge", full: "Merge PDF" },
-    { href: "/split-pdf", short: "Split", full: "Split PDF" },
-    { href: "/compress-pdf", short: "Compress", full: "Compress PDF" },
-  ];
+  const isPdfTool = ["/merge-pdf", "/split-pdf", "/compress-pdf"].includes(pathname);
+  const isImageTool = ["/compress-image", "/resize-image", "/convert-to-jpg", "/rotate-image", "/watermark-image"].includes(pathname);
 
   return (
     <header className="sticky top-0 z-50 border-b border-subtle" style={{ background: "rgba(15,17,23,0.85)", backdropFilter: "blur(16px)" }}>
@@ -28,20 +25,28 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-0.5 sm:gap-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
-                pathname === item.href
-                  ? "bg-brand-600/20 text-brand-300"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <span className="sm:hidden">{item.short}</span>
-              <span className="hidden sm:inline">{item.full}</span>
-            </Link>
-          ))}
+          <Link
+            href="/#pdf-tools"
+            className={`px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+              isPdfTool
+                ? "bg-brand-600/20 text-brand-300"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <span className="sm:hidden">PDF</span>
+            <span className="hidden sm:inline">Tools PDF</span>
+          </Link>
+          <Link
+            href="/#image-tools"
+            className={`px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+              isImageTool
+                ? "bg-orange-600/20 text-orange-300"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <span className="sm:hidden">Gambar</span>
+            <span className="hidden sm:inline">Tools Gambar</span>
+          </Link>
         </nav>
       </div>
     </header>
