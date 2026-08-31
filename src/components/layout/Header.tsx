@@ -7,7 +7,7 @@ export default function Header() {
   const pathname = usePathname();
 
   const isPdfTool = ["/merge-pdf", "/split-pdf", "/compress-pdf"].includes(pathname);
-  const isImageTool = ["/compress-image", "/resize-image", "/convert-to-jpg", "/rotate-image", "/watermark-image"].includes(pathname);
+  const isImageTool = ["/compress-image", "/resize-image", "/convert-to-jpg", "/convert-to-webp", "/rotate-image", "/watermark-image"].includes(pathname);
 
   return (
     <header className="sticky top-0 z-50 border-b border-subtle" style={{ background: "rgba(15,17,23,0.85)", backdropFilter: "blur(16px)" }}>

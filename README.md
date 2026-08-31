@@ -21,6 +21,7 @@ A client-side PDF and image processing tool built as a portfolio project. All fi
 | Compress Image | ✅ Live |
 | Resize Image | ✅ Live |
 | Convert to JPG | ✅ Live |
+| Convert to WebP | ✅ Live |
 | Rotate Image | ✅ Live |
 | Watermark Image | ✅ Live |
 

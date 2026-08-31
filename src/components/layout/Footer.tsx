@@ -47,6 +47,7 @@ export default function Footer() {
                 { href: "/compress-image", label: "Compress Image" },
                 { href: "/resize-image", label: "Resize Image" },
                 { href: "/convert-to-jpg", label: "Convert to JPG" },
+                { href: "/convert-to-webp", label: "Convert to WebP" },
                 { href: "/rotate-image", label: "Rotate Image" },
                 { href: "/watermark-image", label: "Watermark Image" },
               ].map((l) => (

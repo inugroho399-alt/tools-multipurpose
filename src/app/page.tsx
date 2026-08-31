@@ -148,6 +148,22 @@ const imageTools = [
     badgeColor: "bg-slate-500/20 text-slate-300",
     live: true,
   },
+  {
+    id: "convert-to-webp",
+    href: "/convert-to-webp",
+    label: "Convert to WebP",
+    description: "Konversi gambar JPG, PNG, atau format lain ke format WebP untuk ukuran file yang lebih kecil.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/>
+      </svg>
+    ),
+    gradient: "from-purple-500 to-fuchsia-500",
+    glow: "rgba(168,85,247,0.25)",
+    badge: "Baru",
+    badgeColor: "bg-purple-500/20 text-purple-300",
+    live: true,
+  },
 ];
 
 function ToolCard({ tool }: { tool: typeof pdfTools[0] | typeof imageTools[0] }) {
