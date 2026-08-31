@@ -44,7 +44,7 @@ const tools = [
     ),
     gradient: "from-violet-600 to-purple-600",
     glow: "rgba(124,58,237,0.25)",
-    badge: "Segera",
+    badge: "Baru",
     badgeColor: "bg-violet-500/20 text-violet-300",
   },
   {
