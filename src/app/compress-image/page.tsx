@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import CompressImageClient from "./CompressImageClient";
 
 export const metadata: Metadata = {
   title: "Compress Image — Kompres JPG & PNG Online",
@@ -7,19 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function CompressImagePage() {
-  return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-24 text-center">
-      <div className="glass-card p-12">
-        <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ background: "linear-gradient(135deg,#f97316,#eab308)", boxShadow: "0 8px 24px rgba(249,115,22,0.3)" }}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/>
-          </svg>
-        </div>
-        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-300 mb-4">Segera Hadir</span>
-        <h1 className="text-3xl font-bold text-white mb-3">Compress Image</h1>
-        <p className="text-slate-400 mb-8">Fitur ini sedang dalam pengembangan.</p>
-        <Link href="/#image-tools" className="btn-primary">← Kembali ke Tools Gambar</Link>
-      </div>
-    </div>
-  );
+  return <CompressImageClient />;
 }
+

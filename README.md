@@ -18,11 +18,11 @@ A client-side PDF and image processing tool built as a portfolio project. All fi
 ### Image Tools *(coming soon)*
 | Tool | Status |
 |---|---|
-| Compress Image | 🔧 In development |
-| Resize Image | 🔧 In development |
-| Convert to JPG | 🔧 In development |
-| Rotate Image | 🔧 In development |
-| Watermark Image | 🔧 In development |
+| Compress Image | ✅ Live |
+| Resize Image | ✅ Live |
+| Convert to JPG | ✅ Live |
+| Rotate Image | ✅ Live |
+| Watermark Image | ✅ Live |
 
 ---
 
