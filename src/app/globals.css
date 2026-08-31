@@ -1,13 +1,54 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-inter: "Inter", sans-serif;
-}
-
 @layer base {
+  :root {
+    --font-inter: "Inter", sans-serif;
+    
+    /* Light Mode Variables */
+    --bg-page: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-subtle: #64748b;
+    --border-subtle: rgba(0, 0, 0, 0.1);
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-hover: rgba(255, 255, 255, 0.95);
+    
+    --btn-sec-bg: rgba(0, 0, 0, 0.04);
+    --btn-sec-border: rgba(0, 0, 0, 0.1);
+    --btn-sec-text: #475569;
+    --btn-sec-hover-bg: rgba(0, 0, 0, 0.08);
+    --btn-sec-hover-border: rgba(0, 0, 0, 0.2);
+    --btn-sec-hover-text: #0f172a;
+    
+    --scroll-track: #e2e8f0;
+  }
+
+  .dark {
+    /* Dark Mode Variables */
+    --bg-page: #0f1117;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.07);
+    
+    --btn-sec-bg: rgba(255, 255, 255, 0.06);
+    --btn-sec-border: rgba(255, 255, 255, 0.1);
+    --btn-sec-text: #cbd5e1;
+    --btn-sec-hover-bg: rgba(255, 255, 255, 0.1);
+    --btn-sec-hover-border: rgba(255, 255, 255, 0.18);
+    --btn-sec-hover-text: #ffffff;
+    
+    --scroll-track: #1a1f2e;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -18,11 +59,12 @@
 
   body {
     font-family: var(--font-inter), sans-serif;
-    background-color: #0f1117;
-    color: #e2e8f0;
+    background-color: var(--bg-page);
+    color: var(--text-main);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
@@ -36,7 +78,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #1a1f2e;
+    background: var(--scroll-track);
   }
 
   ::-webkit-scrollbar-thumb {
@@ -52,13 +94,13 @@
 @layer components {
   /* ── Gradient text ── */
   .gradient-text {
-    @apply bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent;
   }
 
   /* ── Glass card ── */
   .glass-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
@@ -66,7 +108,7 @@
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--glass-hover);
     border-color: rgba(93, 139, 251, 0.35);
     transform: translateY(-3px);
     box-shadow: 0 20px 60px rgba(59, 99, 246, 0.15);
@@ -99,16 +141,16 @@
   /* ── Secondary button ── */
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
+    background: var(--btn-sec-bg);
+    border: 1px solid var(--btn-sec-border);
+    color: var(--btn-sec-text);
     transition: all 0.25s ease;
   }
 
   .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.18);
-    color: #fff;
+    background: var(--btn-sec-hover-bg);
+    border-color: var(--btn-sec-hover-border);
+    color: var(--btn-sec-hover-text);
   }
 
   /* ── Danger button ── */
@@ -116,13 +158,19 @@
     @apply inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium;
     background: rgba(239, 68, 68, 0.12);
     border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #fca5a5;
+    color: #ef4444; /* Light mode */
     transition: all 0.2s ease;
+  }
+  .dark .btn-danger {
+    color: #fca5a5;
   }
 
   .btn-danger:hover {
     background: rgba(239, 68, 68, 0.22);
     border-color: rgba(239, 68, 68, 0.4);
+    color: #dc2626; /* Light mode */
+  }
+  .dark .btn-danger:hover {
     color: #f87171;
   }
 
@@ -148,23 +196,23 @@
 
 @layer utilities {
   .text-muted {
-    color: #64748b;
+    color: var(--text-muted);
   }
 
   .text-subtle {
-    color: #94a3b8;
+    color: var(--text-subtle);
+  }
+  
+  .text-main {
+    color: var(--text-main);
   }
 
   .bg-page {
-    background-color: #0f1117;
-  }
-
-  .bg-surface {
-    background-color: #161b2e;
+    background-color: var(--bg-page);
   }
 
   .border-subtle {
-    border-color: rgba(255, 255, 255, 0.07);
+    border-color: var(--border-subtle);
   }
 
   /* Glow effect */
@@ -172,3 +220,4 @@
     box-shadow: 0 0 40px rgba(59, 99, 246, 0.3), 0 0 80px rgba(59, 99, 246, 0.1);
   }
 }
+

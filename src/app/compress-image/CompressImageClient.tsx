@@ -107,7 +107,7 @@ export default function CompressImageClient() {
             <rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Compress Image</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Compress Image</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Kompres gambar JPG, PNG, dan WebP secara lokal di browser Anda.
         </p>

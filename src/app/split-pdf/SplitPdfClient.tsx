@@ -145,7 +145,7 @@ export default function SplitPdfClient() {
             <path d="M21 3l-9 9"/><path d="M3 3l9 9"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Split PDF</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Split PDF</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Pisahkan halaman PDF menjadi file-file terpisah. Hasil diunduh sebagai satu file ZIP.
         </p>
@@ -225,7 +225,7 @@ export default function SplitPdfClient() {
           {mode === "all" && (
             <p className="text-sm text-slate-400 mb-4">
               Setiap halaman akan menjadi file PDF terpisah —{" "}
-              <span className="text-white">{pageCount} file PDF</span> dikemas dalam 1 ZIP.
+              <span className="text-slate-900 dark:text-white">{pageCount} file PDF</span> dikemas dalam 1 ZIP.
             </p>
           )}
 
@@ -306,7 +306,7 @@ export default function SplitPdfClient() {
             </div>
             <p className="text-emerald-300 font-semibold text-lg">PDF berhasil dipisahkan!</p>
             <p className="text-slate-400 text-sm mt-1">
-              <span className="text-white font-medium">{result.fileCount} file PDF</span>
+              <span className="text-slate-900 dark:text-white font-medium">{result.fileCount} file PDF</span>
               {" "}dikemas dalam 1 file ZIP (
               {(result.bytes.byteLength / (1024 * 1024)).toFixed(2)} MB)
             </p>

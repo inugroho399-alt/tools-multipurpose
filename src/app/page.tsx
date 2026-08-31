@@ -178,14 +178,14 @@ function ToolCard({ tool }: { tool: typeof pdfTools[0] | typeof imageTools[0] })
       </span>
 
       <div
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${tool.gradient} text-white`}
+        className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${tool.gradient} text-slate-900 dark:text-white`}
         style={{ boxShadow: `0 8px 24px ${tool.glow}` }}
       >
         {tool.icon}
       </div>
 
       <div>
-        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-brand-300 transition-colors">
           {tool.label}
         </h3>
         <p className="text-sm text-slate-400 leading-relaxed">{tool.description}</p>
@@ -216,7 +216,7 @@ export default function HomePage() {
       <section className="relative pt-24 pb-16 px-4 sm:px-6 text-center">
         <div className="max-w-3xl mx-auto animate-fade-in">
           <span className="section-label inline-block mb-4">Alat PDF & Gambar Online</span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6">
             Proses file{" "}
             <span className="gradient-text">PDF & gambar</span>
             {" "}di browser
@@ -237,7 +237,7 @@ export default function HomePage() {
                 <polyline points="14 2 14 8 20 8"/>
               </svg>
             </div>
-            <h2 className="text-base font-bold text-white">Tools PDF</h2>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">Tools PDF</h2>
           </div>
           <div className="flex-1 h-px bg-white/8"></div>
           <span className="text-xs text-slate-500">{pdfTools.length} tools</span>
@@ -259,7 +259,7 @@ export default function HomePage() {
                 <path d="m21 15-5-5L5 21"/>
               </svg>
             </div>
-            <h2 className="text-base font-bold text-white">Tools Gambar</h2>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">Tools Gambar</h2>
           </div>
           <div className="flex-1 h-px bg-white/8"></div>
           <span className="text-xs text-slate-500">{imageTools.length} tools</span>
@@ -273,7 +273,7 @@ export default function HomePage() {
       {/* Why section */}
       <section className="relative border-t border-subtle py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-xl font-bold text-white mb-10">Kenapa tidak pakai ilovepdf atau iloveimg?</h2>
+          <h2 className="text-center text-xl font-bold text-slate-900 dark:text-white mb-10">Kenapa tidak pakai ilovepdf atau iloveimg?</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <div className="glass-card p-6">
@@ -283,7 +283,7 @@ export default function HomePage() {
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-1.5">File tidak pernah meninggalkan browser</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-1.5">File tidak pernah meninggalkan browser</h3>
               <p className="text-sm text-slate-400 leading-relaxed">Semua proses terjadi di perangkat Anda. Tidak ada yang dikirim ke server.</p>
             </div>
 
@@ -293,7 +293,7 @@ export default function HomePage() {
                   <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-1.5">Tanpa iklan, tanpa batas file</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-1.5">Tanpa iklan, tanpa batas file</h3>
               <p className="text-sm text-slate-400 leading-relaxed">Tidak ada limit harian, tidak perlu akun, tidak ada watermark pada hasil.</p>
             </div>
 
@@ -303,7 +303,7 @@ export default function HomePage() {
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-1.5">Cepat karena tidak perlu upload</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-1.5">Cepat karena tidak perlu upload</h3>
               <p className="text-sm text-slate-400 leading-relaxed">Kecepatan proses hanya bergantung pada CPU perangkat Anda, bukan koneksi internet.</p>
             </div>
           </div>

@@ -104,7 +104,7 @@ export default function ConvertToJpgClient() {
             <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Convert to JPG</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Convert to JPG</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Konversi gambar ke format JPG secara lokal di browser Anda. Latar transparan akan menjadi putih.
         </p>

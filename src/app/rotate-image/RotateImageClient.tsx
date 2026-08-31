@@ -114,7 +114,7 @@ export default function RotateImageClient() {
             <path d="M3 3v5h5"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Rotate Image</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Rotate Image</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Putar gambar secara instan langsung di browser Anda.
         </p>

@@ -78,7 +78,7 @@ export default function PdfDropzone({ onFilesAdded, multiple = true }: PdfDropzo
             <p className="text-brand-300 font-semibold text-lg">Lepaskan file di sini...</p>
           ) : (
             <>
-              <p className="text-white font-semibold text-lg">
+              <p className="text-slate-900 dark:text-white font-semibold text-lg">
                 Seret & lepas file PDF di sini
               </p>
               <p className="text-slate-500 text-sm mt-1">

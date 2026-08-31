@@ -98,7 +98,7 @@ export default function CompressPdfClient() {
             <path d="m9.2 22 3-7 3 7"/><path d="M9.2 22h5.6"/><path d="M11 15h2"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Compress PDF</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Compress PDF</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Optimalkan struktur internal PDF untuk mengurangi ukuran file. Proses terjadi di browser — tidak ada upload.
         </p>

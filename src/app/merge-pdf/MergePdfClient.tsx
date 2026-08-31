@@ -90,7 +90,7 @@ export default function MergePdfClient() {
             <path d="M12 22v-8.3a4 4 0 0 1 1.17-2.83L21 3"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Merge PDF</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Merge PDF</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Gabungkan beberapa file PDF menjadi satu. Atur urutannya dengan drag & drop.
         </p>
@@ -215,7 +215,7 @@ export default function MergePdfClient() {
             <p className="text-emerald-300 font-semibold text-lg">PDF berhasil digabungkan!</p>
             <p className="text-slate-400 text-sm mt-1">
               Ukuran hasil:{" "}
-              <span className="text-white font-medium">
+              <span className="text-slate-900 dark:text-white font-medium">
                 {(resultSize / (1024 * 1024)).toFixed(2)} MB
               </span>
               {" "}dari {files.length} file
@@ -261,7 +261,7 @@ export default function MergePdfClient() {
                 <div className="w-8 h-8 rounded-full bg-brand-600/25 text-brand-300 text-sm font-bold flex items-center justify-center mx-auto mb-3">
                   {s.step}
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-1">{s.title}</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">{s.title}</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">{s.desc}</p>
               </div>
             ))}

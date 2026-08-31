@@ -157,7 +157,7 @@ export default function WatermarkImageClient() {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Watermark Image</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Watermark Image</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Tambahkan teks watermark ke gambar secara lokal di browser Anda.
         </p>

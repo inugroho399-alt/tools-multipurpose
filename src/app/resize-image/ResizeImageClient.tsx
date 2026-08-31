@@ -134,7 +134,7 @@ export default function ResizeImageClient() {
             <path d="M21 3h-6"/><path d="M21 3v6"/><path d="M3 21h6"/><path d="M3 21v-6"/><path d="M21 3 3 21"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Resize Image</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Resize Image</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Ubah dimensi gambar JPG, PNG, atau WebP secara lokal di browser Anda.
         </p>

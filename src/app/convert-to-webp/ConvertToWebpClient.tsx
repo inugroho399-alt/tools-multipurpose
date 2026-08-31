@@ -101,7 +101,7 @@ export default function ConvertToWebpClient() {
             <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/>
           </svg>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Convert to WebP</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">Convert to WebP</h1>
         <p className="text-slate-400 max-w-md mx-auto">
           Konversi gambar JPG, PNG, atau format lain ke WebP generasi terbaru untuk ukuran lebih kecil.
         </p>
