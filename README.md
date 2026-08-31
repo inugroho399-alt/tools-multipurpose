@@ -15,7 +15,7 @@ A client-side PDF and image processing tool built as a portfolio project. All fi
 | **Split PDF** | ✅ Live | Split by individual pages or custom page ranges. Output as ZIP. |
 | **Compress PDF** | ✅ Live | Optimize PDF structure to reduce file size. Shows before/after comparison. |
 
-### Image Tools *(coming soon)*
+### Image Tools
 | Tool | Status |
 |---|---|
 | Compress Image | ✅ Live |
@@ -42,6 +42,7 @@ Files are read via the [File API](https://developer.mozilla.org/en-US/docs/Web/A
 
 - **Framework:** [Next.js 14](https://nextjs.org/) (App Router) + TypeScript
 - **Styling:** [Tailwind CSS v3](https://tailwindcss.com/)
+- **Theming:** [next-themes](https://github.com/pacocoursey/next-themes) (Dark/Light Mode)
 - **PDF:** [pdf-lib](https://pdf-lib.js.org/) — client-side PDF processing
 - **ZIP:** [JSZip](https://stuk.github.io/jszip/)
 - **Drag & Drop Upload:** [react-dropzone](https://react-dropzone.js.org/)
@@ -113,6 +114,8 @@ src/
 ## Design Decisions
 
 **Client-side only** — pdf-lib and Canvas API run in the browser. User files never leave the device. No backend, no storage, no accounts.
+
+**Dark/Light Mode** — Full theme support using `next-themes` and Tailwind CSS variables, with a seamless toggle switch that remembers user preference without FOUC (Flash of Unstyled Content).
 
 **No premature abstraction** — utilities are only extracted when used in multiple places. Components that are used once stay where they're used.
 
