@@ -75,7 +75,7 @@ function SortableFileRow({
       </span>
 
       {/* PDF icon */}
-      <div className="w-8 h-8 rounded-lg bg-red-500/15 border border-red-500/20 flex items-center justify-center flex-shrink-0">
+      <div className="hidden sm:flex w-8 h-8 rounded-lg bg-red-500/15 border border-red-500/20 items-center justify-center flex-shrink-0">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
           <polyline points="14 2 14 8 20 8"/>

@@ -62,7 +62,7 @@ const tools = [
     ),
     gradient: "from-emerald-600 to-teal-600",
     glow: "rgba(16,185,129,0.25)",
-    badge: "Segera",
+    badge: "Baru",
     badgeColor: "bg-emerald-500/20 text-emerald-300",
   },
 ];

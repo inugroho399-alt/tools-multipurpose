@@ -14,15 +14,12 @@ export default function MergePdfClient() {
   const [resultBytes, setResultBytes] = useState<Uint8Array | null>(null);
   const [resultSize, setResultSize] = useState<number>(0);
 
-  /* ── File handlers ── */
   const handleFilesAdded = useCallback((newFiles: PdfFile[]) => {
     setFiles((prev) => {
-      // Deduplicate by name+size to avoid re-adding same file
       const existing = new Set(prev.map((f) => `${f.name}-${f.size}`));
       const unique = newFiles.filter((f) => !existing.has(`${f.name}-${f.size}`));
       return [...prev, ...unique];
     });
-    // Reset output state when new files are added
     setState("idle");
     setError(null);
     setResultBytes(null);
@@ -46,7 +43,6 @@ export default function MergePdfClient() {
     setResultBytes(null);
   };
 
-  /* ── Merge logic ── */
   const handleMerge = async () => {
     if (files.length < 2) {
       setError("Minimal 2 file PDF dibutuhkan untuk merge.");
@@ -76,7 +72,6 @@ export default function MergePdfClient() {
     downloadPdf(resultBytes, `merged-${timestamp}.pdf`);
   };
 
-  /* ── Derived values ── */
   const totalInputSize = files.reduce((acc, f) => acc + f.size, 0);
   const canMerge = files.length >= 2 && state !== "processing";
 

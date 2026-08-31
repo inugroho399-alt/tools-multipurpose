@@ -11,6 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://tools-multipurpose.vercel.app"
+  ),
   title: {
     default: "PDFTools — Alat PDF Online Gratis",
     template: "%s | PDFTools",
