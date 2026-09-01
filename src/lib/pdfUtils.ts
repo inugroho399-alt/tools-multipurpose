@@ -17,7 +17,7 @@ export async function mergePdfs(files: File[]): Promise<Uint8Array> {
       throw new Error(`Gagal membaca file "${file.name}". Pastikan file tidak korup.`);
     }
 
-    let sourcePdf: InstanceType<typeof PDFDocument>;
+    let sourcePdf: Awaited<ReturnType<typeof PDFDocument.load>>;
     try {
       sourcePdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: false });
     } catch {
