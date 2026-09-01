@@ -44,7 +44,7 @@ export default function RotateImageClient() {
     setError(null);
     setResultBlob(null);
 
-    await new Promise<void>((r) => requestAnimationFrame(r));
+    await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     try {
       const blob = await processImage("rotate", file.file, { degrees: rotation });

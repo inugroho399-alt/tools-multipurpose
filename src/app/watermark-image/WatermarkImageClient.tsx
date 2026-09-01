@@ -56,7 +56,7 @@ export default function WatermarkImageClient() {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
 
-    await new Promise<void>((r) => requestAnimationFrame(r));
+    await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     try {
       const blob = await processImage("watermark", file.file, {

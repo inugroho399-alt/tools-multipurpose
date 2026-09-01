@@ -78,7 +78,7 @@ export default function SplitPdfClient() {
     setResult(null);
 
     // Yield one frame so React renders the spinner before the heavy work starts
-    await new Promise<void>((r) => requestAnimationFrame(r));
+    await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     try {
       const { PDFDocument } = await import("pdf-lib");

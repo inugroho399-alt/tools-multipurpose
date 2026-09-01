@@ -44,7 +44,7 @@ export default function ConvertToWebpClient() {
     setError(null);
     setResultBlob(null);
 
-    await new Promise<void>((r) => requestAnimationFrame(r));
+    await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     try {
       const blob = await processImage("convert", file.file, {

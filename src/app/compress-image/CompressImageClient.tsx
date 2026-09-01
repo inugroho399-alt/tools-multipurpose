@@ -45,7 +45,7 @@ export default function CompressImageClient() {
     setResultBlob(null);
 
     // Yield one frame so React renders the spinner before the heavy work starts
-    await new Promise<void>((r) => requestAnimationFrame(r));
+    await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     try {
       const outputType =
