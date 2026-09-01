@@ -1,3 +1,5 @@
+import type { PDFDocument } from "pdf-lib";
+
 export async function mergePdfs(files: File[]): Promise<Uint8Array> {
   if (files.length < 2) {
     throw new Error("Minimal 2 file PDF dibutuhkan untuk merge.");
@@ -15,7 +17,7 @@ export async function mergePdfs(files: File[]): Promise<Uint8Array> {
       throw new Error(`Gagal membaca file "${file.name}". Pastikan file tidak korup.`);
     }
 
-    let sourcePdf: PDFDocument;
+    let sourcePdf: InstanceType<typeof PDFDocument>;
     try {
       sourcePdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: false });
     } catch {
