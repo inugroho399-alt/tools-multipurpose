@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import ImageDropzone, { type ImageFile } from "@/components/image/ImageDropzone";
+import { processImage } from "@/lib/imageProcessor";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -37,56 +38,22 @@ export default function RotateImageClient() {
     setResultBlob(null);
   };
 
-  const handleRotate = () => {
+  const handleRotate = async () => {
     if (!file) return;
     setState("processing");
     setError(null);
     setResultBlob(null);
 
-    const img = new Image();
-    img.src = file.preview;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        setError("Gagal memproses gambar pada browser ini.");
-        setState("error");
-        return;
-      }
+    await new Promise<void>((r) => requestAnimationFrame(r));
 
-      // Calculate new dimensions based on rotation
-      if (rotation === 90 || rotation === 270) {
-        canvas.width = img.height;
-        canvas.height = img.width;
-      } else {
-        canvas.width = img.width;
-        canvas.height = img.height;
-      }
-
-      // Translate context to center of canvas
-      ctx.translate(canvas.width / 2, canvas.height / 2);
-      // Rotate context
-      ctx.rotate((rotation * Math.PI) / 180);
-      // Draw image offset by half its width and height to center it
-      ctx.drawImage(img, -img.width / 2, -img.height / 2);
-
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setResultBlob(blob);
-            setState("done");
-          } else {
-            setError("Gagal menghasilkan gambar hasil rotasi.");
-            setState("error");
-          }
-        },
-        file.file.type
-      );
-    };
-    img.onerror = () => {
-      setError("Gagal membaca file gambar.");
+    try {
+      const blob = await processImage("rotate", file.file, { degrees: rotation });
+      setResultBlob(blob);
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Gagal memproses gambar.");
       setState("error");
-    };
+    }
   };
 
   const handleDownload = () => {

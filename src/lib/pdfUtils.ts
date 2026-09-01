@@ -1,10 +1,10 @@
-import { PDFDocument } from "pdf-lib";
-
 export async function mergePdfs(files: File[]): Promise<Uint8Array> {
   if (files.length < 2) {
     throw new Error("Minimal 2 file PDF dibutuhkan untuk merge.");
   }
 
+  // Dynamically import pdf-lib — defers the ~200KB bundle until first actual use
+  const { PDFDocument } = await import("pdf-lib");
   const mergedDoc = await PDFDocument.create();
 
   for (const file of files) {

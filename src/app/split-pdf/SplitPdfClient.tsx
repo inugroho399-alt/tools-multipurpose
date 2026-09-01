@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { PDFDocument } from "pdf-lib";
-import JSZip from "jszip";
 import PdfDropzone, { type PdfFile } from "@/components/pdf/PdfDropzone";
 
 // Parses "1-3, 5, 7-9" → [[0,2], [4,4], [6,8]] (0-indexed).
@@ -52,6 +50,7 @@ export default function SplitPdfClient() {
 
     try {
       const buf = await incoming.file.arrayBuffer();
+      const { PDFDocument } = await import("pdf-lib");
       const doc = await PDFDocument.load(buf);
       setFile(incoming);
       setFileBuffer(buf);
@@ -78,7 +77,12 @@ export default function SplitPdfClient() {
     setError(null);
     setResult(null);
 
+    // Yield one frame so React renders the spinner before the heavy work starts
+    await new Promise<void>((r) => requestAnimationFrame(r));
+
     try {
+      const { PDFDocument } = await import("pdf-lib");
+      const { default: JSZip } = await import("jszip");
       const sourceDoc = await PDFDocument.load(fileBuffer);
       const zip = new JSZip();
 

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import ImageDropzone, { type ImageFile } from "@/components/image/ImageDropzone";
+import { processImage } from "@/lib/imageProcessor";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -37,47 +38,27 @@ export default function CompressImageClient() {
     setResultBlob(null);
   };
 
-  const handleCompress = () => {
+  const handleCompress = async () => {
     if (!file) return;
     setState("processing");
     setError(null);
     setResultBlob(null);
 
-    const img = new Image();
-    img.src = file.preview;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        setError("Gagal memproses gambar pada browser ini.");
-        setState("error");
-        return;
-      }
-      ctx.drawImage(img, 0, 0);
+    // Yield one frame so React renders the spinner before the heavy work starts
+    await new Promise<void>((r) => requestAnimationFrame(r));
 
-      // Force output as jpeg or webp to utilize compression
-      const outputType = file.file.type === "image/png" || file.file.type === "image/webp" ? "image/webp" : "image/jpeg";
-      
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setResultBlob(blob);
-            setState("done");
-          } else {
-            setError("Gagal menghasilkan gambar kompresi.");
-            setState("error");
-          }
-        },
-        outputType,
-        quality
-      );
-    };
-    img.onerror = () => {
-      setError("Gagal membaca file gambar.");
+    try {
+      const outputType =
+        file.file.type === "image/png" || file.file.type === "image/webp"
+          ? "image/webp"
+          : "image/jpeg";
+      const blob = await processImage("compress", file.file, { quality, targetType: outputType });
+      setResultBlob(blob);
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Gagal memproses gambar.");
       setState("error");
-    };
+    }
   };
 
   const handleDownload = () => {

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import ImageDropzone, { type ImageFile } from "@/components/image/ImageDropzone";
+import { processImage } from "@/lib/imageProcessor";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -37,47 +38,26 @@ export default function ConvertToJpgClient() {
     setResultBlob(null);
   };
 
-  const handleConvert = () => {
+  const handleConvert = async () => {
     if (!file) return;
     setState("processing");
     setError(null);
     setResultBlob(null);
 
-    const img = new Image();
-    img.src = file.preview;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        setError("Gagal memproses gambar pada browser ini.");
-        setState("error");
-        return;
-      }
-      // Fill with white background in case of transparent png/webp
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+    await new Promise<void>((r) => requestAnimationFrame(r));
 
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setResultBlob(blob);
-            setState("done");
-          } else {
-            setError("Gagal menghasilkan gambar JPG.");
-            setState("error");
-          }
-        },
-        "image/jpeg",
-        quality
-      );
-    };
-    img.onerror = () => {
-      setError("Gagal membaca file gambar.");
+    try {
+      const blob = await processImage("convert", file.file, {
+        targetType: "image/jpeg",
+        quality,
+        fillWhite: true,
+      });
+      setResultBlob(blob);
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Gagal memproses gambar.");
       setState("error");
-    };
+    }
   };
 
   const handleDownload = () => {

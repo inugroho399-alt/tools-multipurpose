@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import ImageDropzone, { type ImageFile } from "@/components/image/ImageDropzone";
+import { processImage } from "@/lib/imageProcessor";
 
 export default function ResizeImageClient() {
   const [file, setFile] = useState<ImageFile | null>(null);
@@ -66,7 +67,7 @@ export default function ResizeImageClient() {
     setResultBlob(null);
   };
 
-  const handleResize = () => {
+  const handleResize = async () => {
     if (!file) return;
     if (newDimensions.width <= 0 || newDimensions.height <= 0) {
       setError("Dimensi harus lebih besar dari 0.");
@@ -77,37 +78,19 @@ export default function ResizeImageClient() {
     setError(null);
     setResultBlob(null);
 
-    const img = new Image();
-    img.src = file.preview;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = newDimensions.width;
-      canvas.height = newDimensions.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        setError("Gagal memproses gambar pada browser ini.");
-        setState("error");
-        return;
-      }
-      ctx.drawImage(img, 0, 0, newDimensions.width, newDimensions.height);
+    await new Promise<void>((r) => requestAnimationFrame(r));
 
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setResultBlob(blob);
-            setState("done");
-          } else {
-            setError("Gagal menghasilkan gambar resize.");
-            setState("error");
-          }
-        },
-        file.file.type
-      );
-    };
-    img.onerror = () => {
-      setError("Gagal membaca file gambar.");
+    try {
+      const blob = await processImage("resize", file.file, {
+        newWidth: newDimensions.width,
+        newHeight: newDimensions.height,
+      });
+      setResultBlob(blob);
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Gagal memproses gambar.");
       setState("error");
-    };
+    }
   };
 
   const handleDownload = () => {

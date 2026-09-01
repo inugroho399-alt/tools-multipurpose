@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { PDFDocument } from "pdf-lib";
 import PdfDropzone, { type PdfFile } from "@/components/pdf/PdfDropzone";
 
 function formatBytes(bytes: number): string {
@@ -28,7 +27,7 @@ export default function CompressPdfClient() {
 
     try {
       const buf = await incoming.file.arrayBuffer();
-      // Verify it's a valid PDF before accepting
+      const { PDFDocument } = await import("pdf-lib");
       await PDFDocument.load(buf);
       setFile(incoming);
       setFileBuffer(buf);
@@ -52,7 +51,11 @@ export default function CompressPdfClient() {
     setError(null);
     setResult(null);
 
+    // Yield one frame so React renders the spinner before the heavy work starts
+    await new Promise<void>((r) => requestAnimationFrame(r));
+
     try {
+      const { PDFDocument } = await import("pdf-lib");
       const doc = await PDFDocument.load(fileBuffer);
       // useObjectStreams compresses cross-reference tables and metadata structure.
       // Effective on older/unoptimized PDFs; minimal effect on already-optimized or image-only PDFs.

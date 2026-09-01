@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import ImageDropzone, { type ImageFile } from "@/components/image/ImageDropzone";
+import { processImage } from "@/lib/imageProcessor";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -47,7 +48,7 @@ export default function WatermarkImageClient() {
     setPreviewUrl(null);
   };
 
-  const generateWatermark = () => {
+  const generateWatermark = async () => {
     if (!file || !text) return;
     setState("processing");
     setError(null);
@@ -55,82 +56,23 @@ export default function WatermarkImageClient() {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
 
-    const img = new Image();
-    img.src = file.preview;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        setError("Gagal memproses gambar pada browser ini.");
-        setState("error");
-        return;
-      }
+    await new Promise<void>((r) => requestAnimationFrame(r));
 
-      ctx.drawImage(img, 0, 0);
-
-      ctx.globalAlpha = opacity;
-      ctx.font = `bold ${fontSize}px sans-serif`;
-      ctx.fillStyle = color;
-      
-      const textMetrics = ctx.measureText(text);
-      const textWidth = textMetrics.width;
-      const textHeight = fontSize; // Approximation
-      
-      let x = 0;
-      let y = 0;
-      const padding = 20;
-
-      switch (position) {
-        case "center":
-          x = (canvas.width - textWidth) / 2;
-          y = (canvas.height + textHeight) / 2;
-          break;
-        case "bottom-right":
-          x = canvas.width - textWidth - padding;
-          y = canvas.height - padding;
-          break;
-        case "bottom-left":
-          x = padding;
-          y = canvas.height - padding;
-          break;
-        case "top-right":
-          x = canvas.width - textWidth - padding;
-          y = padding + textHeight;
-          break;
-        case "top-left":
-          x = padding;
-          y = padding + textHeight;
-          break;
-      }
-
-      // Add shadow for better visibility
-      ctx.shadowColor = "rgba(0,0,0,0.5)";
-      ctx.shadowBlur = 4;
-      ctx.shadowOffsetX = 2;
-      ctx.shadowOffsetY = 2;
-      
-      ctx.fillText(text, x, y);
-
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setResultBlob(blob);
-            setPreviewUrl(URL.createObjectURL(blob));
-            setState("done");
-          } else {
-            setError("Gagal menghasilkan gambar dengan watermark.");
-            setState("error");
-          }
-        },
-        file.file.type
-      );
-    };
-    img.onerror = () => {
-      setError("Gagal membaca file gambar.");
+    try {
+      const blob = await processImage("watermark", file.file, {
+        text,
+        position,
+        fontSize,
+        color,
+        opacity,
+      });
+      setResultBlob(blob);
+      setPreviewUrl(URL.createObjectURL(blob));
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Gagal memproses gambar.");
       setState("error");
-    };
+    }
   };
 
   const handleDownload = () => {
